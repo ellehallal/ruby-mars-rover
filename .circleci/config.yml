@@ -1,0 +1,17 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.1.1
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: bundle install
+      - run:
+          name: Run Lint
+          command: rubocop
+      - run:
+          name: Tests
+          command: rspec
