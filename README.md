@@ -15,3 +15,11 @@ ruby lib/main.rb
 ## Testing
 
 The testing library used is [RSpec](https://rspec.info/). To run the tests, type `rspec` in the terminal.
+
+## Linting
+
+To run the linter, run the following:
+
+```
+rubocop
+```
