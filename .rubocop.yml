@@ -11,3 +11,6 @@ Style/FrozenStringLiteralComment:
 
 Layout/TrailingEmptyLines:
   Enabled: true
+
+Metrics/BlockLength:
+  Enabled: false
