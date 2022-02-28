@@ -12,6 +12,22 @@ class Orientation
     @current = current
   end
 
+  def north
+    NORTH
+  end
+
+  def east
+    EAST
+  end
+
+  def south
+    SOUTH
+  end
+
+  def west
+    WEST
+  end
+
   def valid?(new_orientation)
     TYPES.include?(new_orientation)
   end
