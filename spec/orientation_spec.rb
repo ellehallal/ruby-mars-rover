@@ -6,7 +6,7 @@ describe 'Orientation' do
   let(:east) { 'E' }
   let(:south) { 'S' }
   let(:west) { 'W' }
-  subject { Orientation.new(direction: Direction, current: west) }
+  subject { Orientation.new(direction: Direction, current_orientation: west) }
 
   it 'returns the north orientation' do
     expect(subject.north).to eq(north)
@@ -48,45 +48,45 @@ describe 'Orientation' do
       it 'changes the current orientation from north to west' do
         orientation = Orientation.new(
           direction: Direction,
-          current: north
+          current_orientation: north
         )
 
         orientation.turn(left)
 
-        expect(orientation.current).to eq(west)
+        expect(orientation.current_orientation).to eq(west)
       end
 
       it 'changes the current orientation from west to south' do
         orientation = Orientation.new(
           direction: Direction,
-          current: west
+          current_orientation: west
         )
 
         orientation.turn(left)
 
-        expect(orientation.current).to eq(south)
+        expect(orientation.current_orientation).to eq(south)
       end
 
       it 'changes the current orientation from south to east' do
         orientation = Orientation.new(
           direction: Direction,
-          current: south
+          current_orientation: south
         )
 
         orientation.turn(left)
 
-        expect(orientation.current).to eq(east)
+        expect(orientation.current_orientation).to eq(east)
       end
 
       it 'changes the current orientation from east to north' do
         orientation = Orientation.new(
           direction: Direction,
-          current: east
+          current_orientation: east
         )
 
         orientation.turn(left)
 
-        expect(orientation.current).to eq(north)
+        expect(orientation.current_orientation).to eq(north)
       end
     end
 
@@ -96,45 +96,45 @@ describe 'Orientation' do
       it 'changes the current orientation from north to east' do
         orientation = Orientation.new(
           direction: Direction,
-          current: north
+          current_orientation: north
         )
 
         orientation.turn(right)
 
-        expect(orientation.current).to eq(east)
+        expect(orientation.current_orientation).to eq(east)
       end
 
       it 'changes the current orientation from east to south' do
         orientation = Orientation.new(
           direction: Direction,
-          current: east
+          current_orientation: east
         )
 
         orientation.turn(right)
 
-        expect(orientation.current).to eq(south)
+        expect(orientation.current_orientation).to eq(south)
       end
 
       it 'changes the current orientation from south to west' do
         orientation = Orientation.new(
           direction: Direction,
-          current: south
+          current_orientation: south
         )
 
         orientation.turn(right)
 
-        expect(orientation.current).to eq(west)
+        expect(orientation.current_orientation).to eq(west)
       end
 
       it 'changes the current orientation from west to north' do
         orientation = Orientation.new(
           direction: Direction,
-          current: west
+          current_orientation: west
         )
 
         orientation.turn(right)
 
-        expect(orientation.current).to eq(north)
+        expect(orientation.current_orientation).to eq(north)
       end
     end
 
@@ -144,12 +144,12 @@ describe 'Orientation' do
       it 'does not change the current orientation' do
         orientation = Orientation.new(
           direction: Direction,
-          current: north
+          current_orientation: north
         )
 
         orientation.turn(forward)
 
-        expect(orientation.current).to eq(north)
+        expect(orientation.current_orientation).to eq(north)
       end
     end
   end
