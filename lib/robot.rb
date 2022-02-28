@@ -28,7 +28,7 @@ class Robot
 
   def set_current_position(x_axis:, y_axis:)
     values = [x_axis, y_axis]
-    @grid.locate_coordinate(values: values)
+    @grid.locate_coordinate(values)
   end
 
   def turn(new_direction:)

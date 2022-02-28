@@ -14,7 +14,7 @@ describe 'Grid' do
     values = [x_axis, y_axis]
     grid = Grid.new(coordinates: all_coordinates)
 
-    coordinate = grid.locate_coordinate(values: values)
+    coordinate = grid.locate_coordinate(values)
 
     expect(coordinate.x_axis).to eq(x_axis)
     expect(coordinate.y_axis).to eq(y_axis)
@@ -26,7 +26,7 @@ describe 'Grid' do
     values = [x_axis, y_axis]
     grid = Grid.new(coordinates: all_coordinates)
 
-    coordinate = grid.locate_coordinate(values: values)
+    coordinate = grid.locate_coordinate(values)
 
     expect(coordinate).to be nil
   end

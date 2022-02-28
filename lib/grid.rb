@@ -5,7 +5,7 @@ class Grid
     @coordinates = coordinates
   end
 
-  def locate_coordinate(values:)
+  def locate_coordinate(values)
     @coordinates[values]
   end
 end

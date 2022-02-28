@@ -11,7 +11,7 @@ class Move
       y_axis: @current_position.y_axis
     )
 
-    get_new_coordinate(values: values)
+    get_new_coordinate(values)
   end
 
   private
