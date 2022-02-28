@@ -28,4 +28,26 @@ describe 'Direction' do
 
     expect(Direction.valid?(invalid_direction)).to be false
   end
+
+  describe 'turn' do
+    it 'returns true when the direction is a turn direction' do
+      expect(Direction.turn?(right)).to be true
+      expect(Direction.turn?(left)).to be true
+    end
+
+    it 'returns false when the direction is not a turn direction' do
+      expect(Direction.turn?(forward)).to be false
+    end
+  end
+
+  describe 'move' do
+    it 'returns true when the direction is a move direction' do
+      expect(Direction.move?(forward)).to be true
+    end
+
+    it 'returns false when the direction is not a move direction' do
+      expect(Direction.move?(right)).to be false
+      expect(Direction.move?(left)).to be false
+    end
+  end
 end
