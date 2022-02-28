@@ -6,12 +6,12 @@ class Move
   end
 
   def to_position
-    new_coordinate_values = calculate_new_coordinate_values(
+    values = calculate_new_coordinate_values(
       x_axis: @current_position.x_axis,
       y_axis: @current_position.y_axis
     )
 
-    get_new_coordinate(new_coordinate_values)
+    get_new_coordinate(values: values)
   end
 
   private
@@ -28,6 +28,6 @@ class Move
   end
 
   def get_new_coordinate(values)
-    @grid.coordinates[values] || @current_position
+    @grid.locate_coordinate(values) || @current_position
   end
 end
