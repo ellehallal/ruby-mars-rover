@@ -112,7 +112,7 @@ describe 'Robot' do
         expect(subject.current_position.scent).to be true
       end
 
-      it 'does not update the position when the lost is true' do
+      it 'does not update the position when lost is true' do
         subject.respond_to_commands([forward_direction])
         last_position = subject.current_position
         subject.respond_to_commands([forward_direction])
@@ -120,7 +120,7 @@ describe 'Robot' do
         expect(subject.current_position).to eq(last_position)
       end
 
-      it 'does not update the orientation when the lost is true' do
+      it 'does not update the orientation when lost is true' do
         subject.respond_to_commands([forward_direction])
         last_orientatation = subject.current_orientation
         subject.respond_to_commands([left_direction])
