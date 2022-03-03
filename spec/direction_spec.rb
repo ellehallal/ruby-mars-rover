@@ -1,9 +1,9 @@
 require 'direction'
 
 describe 'Direction' do
-  let(:right) { 'R' }
-  let(:left) { 'L' }
-  let(:forward) { 'F' }
+  let(:right) { right_direction }
+  let(:left) { left_direction }
+  let(:forward) { forward_direction }
 
   it 'returns the right direction' do
     expect(Direction.right).to eq(right)

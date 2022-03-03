@@ -2,11 +2,11 @@ require 'orientation'
 require 'direction'
 
 describe 'Orientation' do
-  let(:north) { 'N' }
-  let(:east) { 'E' }
-  let(:south) { 'S' }
-  let(:west) { 'W' }
   subject { Orientation.new(direction: Direction, current_orientation: west) }
+  let(:north) { north_orientation }
+  let(:east) { east_orientation }
+  let(:south) { south_orientation }
+  let(:west) { west_orientation }
 
   it 'returns the north orientation' do
     expect(subject.north).to eq(north)

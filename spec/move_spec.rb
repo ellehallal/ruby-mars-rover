@@ -6,19 +6,13 @@ require 'coordinate'
 require 'grid'
 
 describe 'Move' do
-  let(:all_coordinates) do
-    CoordinatesGenerator.generate(
-      max_x_axis_value: 2,
-      max_y_axis_value: 3
-    )
-  end
-
+  let(:all_coordinates) { get_coordinates(x_axis: 2, y_axis: 3) }
+  let(:grid) { Grid.new(coordinates: all_coordinates) }
+  let(:direction) { Direction }
   let(:current_x_axis) { 1 }
   let(:current_y_axis) { 2 }
   let(:current_position) { all_coordinates[[current_x_axis, current_y_axis]] }
-  let(:direction) { Direction }
   let(:orientation) { Orientation.new(direction: direction, current_orientation: current_orientation) }
-  let(:grid) { Grid.new(coordinates: all_coordinates) }
 
   subject do
     Move.new(
@@ -29,7 +23,7 @@ describe 'Move' do
   end
 
   describe 'north orientation' do
-    let(:current_orientation) { 'N' }
+    let(:current_orientation) { north_orientation }
 
     it 'returns the updated position where y_axis increases by 1' do
       position = subject.to_position
@@ -40,7 +34,7 @@ describe 'Move' do
   end
 
   describe 'south orientation' do
-    let(:current_orientation) { 'S' }
+    let(:current_orientation) { south_orientation }
 
     it 'returns the updated position where y_axis decreases by 1' do
       position = subject.to_position
@@ -51,7 +45,7 @@ describe 'Move' do
   end
 
   describe 'east orientation' do
-    let(:current_orientation) { 'E' }
+    let(:current_orientation) { east_orientation }
 
     it 'returns the updated position where x_axis increases by 1' do
       position = subject.to_position
@@ -62,7 +56,7 @@ describe 'Move' do
   end
 
   describe 'west orientation' do
-    let(:current_orientation) { 'W' }
+    let(:current_orientation) { west_orientation }
 
     it 'returns the updated position where x_axis decreases by 1' do
       position = subject.to_position
@@ -73,7 +67,7 @@ describe 'Move' do
   end
 
   describe 'position does not exist' do
-    let(:current_orientation) { 'N' }
+    let(:current_orientation) { north_orientation }
     let(:current_x_axis) { 2 }
     let(:current_y_axis) { 3 }
 

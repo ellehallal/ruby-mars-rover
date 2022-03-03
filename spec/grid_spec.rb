@@ -1,18 +1,13 @@
 require 'grid'
 
 describe 'Grid' do
-  let(:all_coordinates) do
-    CoordinatesGenerator.generate(
-      max_x_axis_value: 2,
-      max_y_axis_value: 3
-    )
-  end
+  let(:all_coordinates) { get_coordinates(x_axis: 2, y_axis: 3) }
 
   it 'returns the coordinate when it exists' do
+    grid = Grid.new(coordinates: all_coordinates)
     x_axis = 1
     y_axis = 2
     values = [x_axis, y_axis]
-    grid = Grid.new(coordinates: all_coordinates)
 
     coordinate = grid.locate_coordinate(values)
 
@@ -21,10 +16,10 @@ describe 'Grid' do
   end
 
   it 'returns nil when the coordinate does not exist' do
+    grid = Grid.new(coordinates: all_coordinates)
     x_axis = 9
     y_axis = 10
     values = [x_axis, y_axis]
-    grid = Grid.new(coordinates: all_coordinates)
 
     coordinate = grid.locate_coordinate(values)
 

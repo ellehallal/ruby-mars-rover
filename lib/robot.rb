@@ -2,12 +2,16 @@ class Robot
   attr_reader :current_position, :lost
 
   def initialize(grid:, orientation:, x_axis:, y_axis:, direction:, move:)
+    @lost = false
     @grid = grid
     @orientation = orientation
-    @current_position = set_current_position(x_axis: x_axis, y_axis: y_axis)
+    @current_position = @grid.locate_coordinate([x_axis, y_axis])
     @direction = direction
-    @move = move
-    @lost = false
+    @move = move.new(
+      grid: @grid,
+      orientation: @orientation,
+      current_position: @current_position
+    )
   end
 
   def respond_to_direction(new_direction:)
@@ -25,11 +29,6 @@ class Robot
   end
 
   private
-
-  def set_current_position(x_axis:, y_axis:)
-    values = [x_axis, y_axis]
-    @grid.locate_coordinate(values)
-  end
 
   def turn(new_direction:)
     @orientation.turn(new_direction)

@@ -17,20 +17,13 @@ describe 'Robot' do
     )
   end
 
-  let(:coordinates) do
-    CoordinatesGenerator.generate(
-      max_x_axis_value: 2,
-      max_y_axis_value: 3
-    )
-  end
-
+  let(:coordinates) { get_coordinates(x_axis: 2, y_axis: 3) }
   let(:grid) { Grid.new(coordinates: coordinates) }
   let(:direction) { Direction }
   let(:orientation) { Orientation.new(direction: Direction, current_orientation: 'N') }
   let(:x_axis) { 1 }
   let(:y_axis) { 2 }
-  let(:current_position) { coordinates[[x_axis, y_axis]] }
-  let(:move) { Move.new(grid: grid, orientation: orientation, current_position: current_position) }
+  let(:move) { Move }
 
   describe 'respond_to_direction' do
     describe 'current position' do
@@ -62,6 +55,8 @@ describe 'Robot' do
     end
 
     describe 'position' do
+      let(:current_position) { coordinates[[x_axis, y_axis]] }
+
       it 'updates the current position when the direction is forward' do
         subject.respond_to_direction(new_direction: direction.forward)
 
@@ -94,7 +89,7 @@ describe 'Robot' do
       it 'sets the scent to true at the current position' do
         subject.respond_to_direction(new_direction: direction.forward)
 
-        expect(current_position.scent).to be true
+        expect(subject.current_position.scent).to be true
       end
     end
 
