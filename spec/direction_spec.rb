@@ -1,9 +1,9 @@
 require 'direction'
 
 describe 'Direction' do
-  let(:right) { 'R' }
-  let(:left) { 'L' }
-  let(:forward) { 'F' }
+  let(:right) { right_direction }
+  let(:left) { left_direction }
+  let(:forward) { forward_direction }
 
   it 'returns the right direction' do
     expect(Direction.right).to eq(right)
@@ -27,5 +27,27 @@ describe 'Direction' do
     invalid_direction = 'D'
 
     expect(Direction.valid?(invalid_direction)).to be false
+  end
+
+  describe 'turn' do
+    it 'returns true when the direction is a turn direction' do
+      expect(Direction.turn?(right)).to be true
+      expect(Direction.turn?(left)).to be true
+    end
+
+    it 'returns false when the direction is not a turn direction' do
+      expect(Direction.turn?(forward)).to be false
+    end
+  end
+
+  describe 'move' do
+    it 'returns true when the direction is a move direction' do
+      expect(Direction.move?(forward)).to be true
+    end
+
+    it 'returns false when the direction is not a move direction' do
+      expect(Direction.move?(right)).to be false
+      expect(Direction.move?(left)).to be false
+    end
   end
 end

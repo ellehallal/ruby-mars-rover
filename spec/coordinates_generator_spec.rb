@@ -29,7 +29,7 @@ describe 'CoordinatesGenerator' do
 
     expect(coordinates.count).to eq(1)
     expect(selected_coordinate).to be_an_instance_of(Coordinate)
-    expect(selected_coordinate.x_axis).to eq(0)
-    expect(selected_coordinate.y_axis).to eq(0)
+    expect(selected_coordinate.x_axis).to eq(max_x_axis_value)
+    expect(selected_coordinate.y_axis).to eq(max_x_axis_value)
   end
 end
