@@ -7,18 +7,16 @@ class Robot
     @orientation = orientation
     @current_position = @grid.locate_coordinate([x_axis, y_axis])
     @direction = direction
-    @move = move.new(
-      grid: @grid,
-      orientation: @orientation,
-      current_position: @current_position
-    )
+    @move = move
   end
 
-  def respond_to_direction(new_direction:)
-    if Direction.turn?(new_direction)
-      turn(new_direction: new_direction)
-    else
-      move_forward
+  def respond_to_commands(commands)
+    commands.each do |direction|
+      if !lost && Direction.turn?(direction)
+        turn(direction)
+      elsif !lost
+        move_forward
+      end
     end
 
     report_location
@@ -30,12 +28,16 @@ class Robot
 
   private
 
-  def turn(new_direction:)
-    @orientation.turn(new_direction)
+  def turn(direction)
+    @orientation.turn(direction)
   end
 
   def move_forward
-    new_position = @move.to_position
+    new_position = @move.to_position(
+      orientation: @orientation,
+      grid: @grid,
+      current_position: @current_position
+    )
 
     if @current_position == new_position
       mark_as_lost
