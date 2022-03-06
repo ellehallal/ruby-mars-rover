@@ -9,7 +9,13 @@ class Grid
     @coordinates[values]
   end
 
-  def scent?(values)
+  def scent?(coordinate)
+    values = [coordinate&.x_axis, coordinate&.y_axis]
+
     locate_coordinate(values)&.scent? || false
+  end
+
+  def within_bounds?(values)
+    !locate_coordinate(values).nil?
   end
 end
