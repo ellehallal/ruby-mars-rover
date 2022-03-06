@@ -5,7 +5,17 @@ class Grid
     @coordinates = coordinates
   end
 
-  def locate_coordinate(values)
+  def get_coordinate(values)
     @coordinates[values]
+  end
+
+  def scent?(coordinate)
+    values = [coordinate&.x_axis, coordinate&.y_axis]
+
+    get_coordinate(values)&.scent? || false
+  end
+
+  def within_bounds?(values)
+    !get_coordinate(values).nil?
   end
 end

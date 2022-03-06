@@ -7,7 +7,7 @@ class Move
         orientation: orientation
       )
 
-      get_new_coordinate(values: values, current_position: current_position, grid: grid)
+      get_move(new_values: values, current_position: current_position, grid: grid)
     end
 
     private
@@ -23,8 +23,23 @@ class Move
       values[orientation.current_orientation]
     end
 
-    def get_new_coordinate(values:, current_position:, grid:)
-      grid.locate_coordinate(values) || current_position
+    def get_move(new_values:, current_position:, grid:)
+      move = default_move(current_position)
+
+      if (grid.scent?(current_position) && grid.within_bounds?(new_values)) || grid.within_bounds?(new_values)
+        move[:coordinate] = grid.get_coordinate(new_values)
+      elsif !grid.scent?(current_position) && !grid.within_bounds?(new_values)
+        move[:lost] = true
+      end
+
+      move
+    end
+
+    def default_move(current_position)
+      {
+        coordinate: current_position,
+        lost: false
+      }.clone
     end
   end
 end

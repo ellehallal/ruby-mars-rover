@@ -5,7 +5,7 @@ class Robot
     @lost = false
     @grid = grid
     @orientation = orientation
-    @current_position = @grid.locate_coordinate([x_axis, y_axis])
+    @current_position = @grid.get_coordinate([x_axis, y_axis])
     @direction = direction
     @move = move
   end
@@ -16,39 +16,13 @@ class Robot
         turn(direction)
       elsif !lost
         move_forward
+        set_scent
       end
     end
-
-    report_location
   end
 
   def current_orientation
     @orientation.current_orientation
-  end
-
-  private
-
-  def turn(direction)
-    @orientation.turn(direction)
-  end
-
-  def move_forward
-    new_position = @move.to_position(
-      orientation: @orientation,
-      grid: @grid,
-      current_position: @current_position
-    )
-
-    if @current_position == new_position
-      mark_as_lost
-    else
-      @current_position = new_position
-    end
-  end
-
-  def mark_as_lost
-    @lost = true
-    @current_position.set_scent
   end
 
   def report_location
@@ -59,5 +33,26 @@ class Robot
     else
       location
     end
+  end
+
+  private
+
+  def turn(direction)
+    @orientation.turn(direction)
+  end
+
+  def move_forward
+    move = @move.to_position(
+      orientation: @orientation,
+      grid: @grid,
+      current_position: @current_position
+    )
+
+    @current_position = move[:coordinate]
+    @lost = move[:lost]
+  end
+
+  def set_scent
+    @current_position.set_scent if lost
   end
 end
