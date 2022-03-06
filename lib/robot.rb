@@ -48,7 +48,7 @@ class Robot
       current_position: @current_position
     )
 
-    @current_position = move[:position]
+    @current_position = move[:coordinate]
     @lost = move[:lost]
   end
 
