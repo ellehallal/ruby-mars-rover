@@ -53,8 +53,6 @@ class Robot
   end
 
   def set_scent
-    if lost
-      @current_position.set_scent
-    end
+    @current_position.set_scent if lost
   end
 end

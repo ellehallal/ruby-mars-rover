@@ -4,7 +4,7 @@ describe 'Grid' do
   let(:all_coordinates) { get_coordinates(x_axis: 2, y_axis: 3) }
   let(:grid) { Grid.new(coordinates: all_coordinates) }
   let(:within_bounds_values) { [1, 2] }
-  let(:out_of_bounds_values) { [9, 10]}
+  let(:out_of_bounds_values) { [9, 10] }
 
   describe 'locate coordinate' do
     it 'returns the coordinate when it exists' do
@@ -22,8 +22,8 @@ describe 'Grid' do
   end
 
   describe 'scent?' do
-    let(:coordinate_within_bounds) {all_coordinates[within_bounds_values]}
-    let(:coordinate_out_of_bounds) {all_coordinates[out_of_bounds_values]}
+    let(:coordinate_within_bounds) { all_coordinates[within_bounds_values] }
+    let(:coordinate_out_of_bounds) { all_coordinates[out_of_bounds_values] }
 
     it 'returns true when the coordinate has a scent' do
       coordinate_within_bounds.set_scent

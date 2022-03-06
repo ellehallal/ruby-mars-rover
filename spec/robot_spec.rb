@@ -27,7 +27,6 @@ describe 'Robot' do
   let(:move) { Move }
 
   describe 'respond_to_commands' do
-
     describe 'orientation' do
       it 'updates the current orientation when the direction is right' do
         subject.respond_to_commands([right_direction])
@@ -83,12 +82,11 @@ describe 'Robot' do
             left_direction
           ]
         )
-  
+
         expect(subject.current_position).not_to eq(starting_position)
         expect(subject.current_orientation).not_to eq(starting_orientation)
       end
     end
-
 
     describe 'lost' do
       let(:x_axis) { 2 }
@@ -131,8 +129,6 @@ describe 'Robot' do
       end
     end
   end
-
-
 
   describe 'current orientation' do
     it 'returns the current orientation' do
