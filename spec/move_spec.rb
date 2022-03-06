@@ -62,4 +62,18 @@ describe 'Move' do
       expect(to_position.y_axis).to eq(current_y_axis)
     end
   end
+
+  describe 'position has a scent' do
+    let(:current_orientation) { north_orientation }
+    let(:current_x_axis) { 2 }
+    let(:current_y_axis) { 2 }
+
+    it 'returns the current position' do
+      potential_position = all_coordinates[[2,3]]
+      potential_position.set_scent
+
+      expect(to_position.x_axis).to eq(current_x_axis)
+      expect(to_position.y_axis).to eq(current_y_axis)
+    end
+  end
 end

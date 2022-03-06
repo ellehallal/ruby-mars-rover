@@ -24,7 +24,11 @@ class Move
     end
 
     def get_new_coordinate(values:, current_position:, grid:)
-      grid.locate_coordinate(values) || current_position
+      if(!grid.locate_coordinate(values) || grid.locate_coordinate(values).scent?)
+        current_position
+      else
+        grid.locate_coordinate(values)
+      end
     end
   end
 end

@@ -8,4 +8,8 @@ class Grid
   def locate_coordinate(values)
     @coordinates[values]
   end
+
+  def scent?(values)
+    locate_coordinate(values)&.scent? || false
+  end
 end

@@ -109,7 +109,7 @@ describe 'Robot' do
       it 'sets the scent to true at the current position' do
         subject.respond_to_commands([forward_direction])
 
-        expect(subject.current_position.scent).to be true
+        expect(subject.current_position.scent?).to be true
       end
 
       it 'does not update the position when lost is true' do

@@ -6,6 +6,6 @@ describe 'Coordinate' do
 
     coordinate.set_scent
 
-    expect(coordinate.scent).to be true
+    expect(coordinate.scent?).to be true
   end
 end
