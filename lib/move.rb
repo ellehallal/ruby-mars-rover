@@ -27,7 +27,7 @@ class Move
       move = default_move(current_position)
 
       if (grid.scent?(current_position) && grid.within_bounds?(new_values)) || grid.within_bounds?(new_values)
-        move[:coordinate] = grid.locate_coordinate(new_values)
+        move[:coordinate] = grid.get_coordinate(new_values)
       elsif !grid.scent?(current_position) && !grid.within_bounds?(new_values)
         move[:lost] = true
       end

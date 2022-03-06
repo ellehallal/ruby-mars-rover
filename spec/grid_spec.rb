@@ -8,14 +8,14 @@ describe 'Grid' do
 
   describe 'locate coordinate' do
     it 'returns the coordinate when it exists' do
-      coordinate = grid.locate_coordinate(within_bounds_values)
+      coordinate = grid.get_coordinate(within_bounds_values)
 
       expect(coordinate.x_axis).to eq(within_bounds_values[0])
       expect(coordinate.y_axis).to eq(within_bounds_values[1])
     end
 
     it 'returns nil when the coordinate does not exist' do
-      coordinate = grid.locate_coordinate(out_of_bounds_values)
+      coordinate = grid.get_coordinate(out_of_bounds_values)
 
       expect(coordinate).to be nil
     end

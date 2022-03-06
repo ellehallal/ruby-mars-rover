@@ -5,7 +5,7 @@ class Robot
     @lost = false
     @grid = grid
     @orientation = orientation
-    @current_position = @grid.locate_coordinate([x_axis, y_axis])
+    @current_position = @grid.get_coordinate([x_axis, y_axis])
     @direction = direction
     @move = move
   end
