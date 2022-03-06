@@ -27,13 +27,6 @@ describe 'Robot' do
   let(:move) { Move }
 
   describe 'respond_to_commands' do
-    describe 'current position' do
-      it 'sets the current position' do
-        expect(subject.current_position).not_to be nil
-        expect(subject.current_position.x_axis).to eq(x_axis)
-        expect(subject.current_position.y_axis).to eq(y_axis)
-      end
-    end
 
     describe 'orientation' do
       it 'updates the current orientation when the direction is right' do
@@ -90,31 +83,39 @@ describe 'Robot' do
             left_direction
           ]
         )
-
+  
         expect(subject.current_position).not_to eq(starting_position)
         expect(subject.current_orientation).not_to eq(starting_orientation)
       end
     end
 
+
     describe 'lost' do
       let(:x_axis) { 2 }
       let(:y_axis) { 3 }
 
-      it 'sets lost to true when the current and new positions are equal' do
+      it 'sets lost' do
         subject.respond_to_commands([forward_direction])
 
         expect(subject.lost).to be true
       end
 
-      it 'sets the scent to true at the current position' do
+      it 'sets the scent when lost is true' do
         subject.respond_to_commands([forward_direction])
 
+        expect(subject.lost).to be true
         expect(subject.current_position.scent?).to be true
+      end
+
+      it 'does not set the scent when lost is false' do
+        expect(subject.lost).to be false
+        expect(subject.current_position.scent?).to be false
       end
 
       it 'does not update the position when lost is true' do
         subject.respond_to_commands([forward_direction])
         last_position = subject.current_position
+
         subject.respond_to_commands([forward_direction])
 
         expect(subject.current_position).to eq(last_position)
@@ -123,23 +124,35 @@ describe 'Robot' do
       it 'does not update the orientation when lost is true' do
         subject.respond_to_commands([forward_direction])
         last_orientatation = subject.current_orientation
+
         subject.respond_to_commands([left_direction])
 
         expect(subject.current_orientation).to eq(last_orientatation)
       end
     end
+  end
 
-    describe 'report location' do
-      let(:x_axis) { 2 }
-      let(:y_axis) { 3 }
 
-      it 'returns the current location' do
-        expect(subject.respond_to_commands([right_direction])).to eq('2 3 E')
-      end
 
-      it 'returns the last known location when lost' do
-        expect(subject.respond_to_commands([forward_direction])).to eq('2 3 N LOST')
-      end
+  describe 'current orientation' do
+    it 'returns the current orientation' do
+      expect(subject.current_orientation).to eq(starting_orientation)
+    end
+  end
+
+  describe 'report location' do
+    let(:x_axis) { 2 }
+    let(:y_axis) { 3 }
+
+    it 'returns the current location' do
+      subject.respond_to_commands([right_direction])
+
+      expect(subject.report_location).to eq('2 3 E')
+    end
+
+    it 'returns the last known location when lost' do
+      subject.respond_to_commands([forward_direction])
+      expect(subject.report_location).to eq('2 3 N LOST')
     end
   end
 end
