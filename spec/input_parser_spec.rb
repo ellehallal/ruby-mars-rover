@@ -3,7 +3,7 @@ require 'input_parser'
 describe 'InputParser' do
   let(:subject) { InputParser.new("53\n11E\nRFRFRFRF\n32N\nFRRFLLFFRRFLL\n03W\nLLFFFLFLFL") }
 
-  it 'parses the grid size' do
+  it 'formats the grid size' do
     expect(subject.grid_size).to eq(
       {
         x_axis: 5,
@@ -12,7 +12,7 @@ describe 'InputParser' do
     )
   end
 
-  it 'parses the instructions' do
+  it 'formats the instructions' do
     expect(subject.instructions).to eq(
       [
         { x_axis: 1, y_axis: 1, orientation: 'E', commands: %w[R F R F R F R F] },

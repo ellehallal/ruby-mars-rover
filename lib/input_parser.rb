@@ -16,9 +16,9 @@ class InputParser
     input_copy = @input.drop(1)
 
     input_copy.each_slice(2).map do |starting_position, commands|
-      coordinate_values = parse_coordinate_values(starting_position)
-      orientation = parse_orientation(starting_position)
-      commands = { commands: commands.chars }
+      coordinate_values = format_coordinate_values(starting_position)
+      orientation = format_orientation(starting_position)
+      commands = format_commands(commands)
 
       coordinate_values.merge(orientation).merge(commands)
     end
@@ -30,7 +30,7 @@ class InputParser
     input.split
   end
 
-  def parse_coordinate_values(starting_position)
+  def format_coordinate_values(starting_position)
     chars = starting_position.chars
     {
       x_axis: chars[0].to_i,
@@ -38,9 +38,11 @@ class InputParser
     }
   end
 
-  def parse_orientation(starting_position)
-    {
-      orientation: starting_position.chars[2]
-    }
+  def format_orientation(starting_position)
+    { orientation: starting_position.chars[2] }
+  end
+
+  def format_commands(commands)
+    { commands: commands.chars }
   end
 end
