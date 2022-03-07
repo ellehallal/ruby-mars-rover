@@ -15,12 +15,12 @@ class InputParser
   def instructions
     input_copy = @input.drop(1)
 
-    input_copy.each_slice(2).map do |starting_position, command|
+    input_copy.each_slice(2).map do |starting_position, commands|
       coordinate_values = parse_coordinate_values(starting_position)
       orientation = parse_orientation(starting_position)
-      command = { command: command }
+      commands = { commands: commands.chars }
 
-      coordinate_values.merge(orientation).merge(command)
+      coordinate_values.merge(orientation).merge(commands)
     end
   end
 
