@@ -45,7 +45,7 @@ describe 'Grid' do
       expect(grid.within_bounds?(within_bounds_values)).to be true
     end
 
-    it 'returns true when an existing coordinate with the values does not exist ' do
+    it 'returns false when an existing coordinate with the values does not exist' do
       expect(grid.within_bounds?(out_of_bounds_values)).to be false
     end
   end
