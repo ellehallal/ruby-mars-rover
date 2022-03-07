@@ -16,6 +16,10 @@ ruby lib/main.rb
 
 The testing library used is [RSpec](https://rspec.info/). To run the tests, type `rspec` in the terminal.
 
+### Test Coverage
+
+In the terminal run `rspec` to generate the report, then run `open coverage/index.html` to open the report in the browser.
+
 ## Linting
 
 To run the linter, run the following:
