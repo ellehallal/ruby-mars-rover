@@ -17,3 +17,6 @@ Metrics/BlockLength:
 
 Metrics/ParameterLists:
   Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
