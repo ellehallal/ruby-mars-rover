@@ -1,6 +1,6 @@
 class InputParser
-  def initialize(file_path)
-    @input = split(file_path)
+  def initialize(input)
+    @input = split(input)
   end
 
   def grid_size
@@ -26,8 +26,8 @@ class InputParser
 
   private
 
-  def split(file_path)
-    File.read(file_path).split
+  def split(input)
+    input.split
   end
 
   def parse_coordinate_values(starting_position)

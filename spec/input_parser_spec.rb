@@ -1,11 +1,7 @@
 require 'input_parser'
 
 describe 'InputParser' do
-  let(:subject) { InputParser.new('/path/to/file') }
-
-  before do
-    allow(File).to receive(:read).and_return("53\n11E\nRFRFRFRF\n32N\nFRRFLLFFRRFLL\n03W\nLLFFFLFLFL")
-  end
+  let(:subject) { InputParser.new("53\n11E\nRFRFRFRF\n32N\nFRRFLLFFRRFLL\n03W\nLLFFFLFLFL") }
 
   it 'parses the grid size' do
     expect(subject.grid_size).to eq(
