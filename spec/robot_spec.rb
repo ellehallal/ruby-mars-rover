@@ -143,12 +143,12 @@ describe 'Robot' do
     it 'returns the current location' do
       subject.respond_to_commands([right_direction])
 
-      expect(subject.report_location).to eq('2 3 E')
+      expect(subject.report_location).to eq('23E')
     end
 
     it 'returns the last known location when lost' do
       subject.respond_to_commands([forward_direction])
-      expect(subject.report_location).to eq('2 3 N LOST')
+      expect(subject.report_location).to eq('23NLOST')
     end
   end
 end

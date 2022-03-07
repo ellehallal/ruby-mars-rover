@@ -26,10 +26,10 @@ class Robot
   end
 
   def report_location
-    location = "#{@current_position.x_axis} #{current_position.y_axis} #{current_orientation}"
+    location = "#{@current_position.x_axis}#{current_position.y_axis}#{current_orientation}"
 
     if lost
-      "#{location} LOST"
+      "#{location}LOST"
     else
       location
     end
