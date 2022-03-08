@@ -13,8 +13,9 @@ class MarsRover
     def start(file_path)
       input_parser = create_input_parser(file_path)
       grid = create_grid(input_parser.grid_size)
+      instructions = input_parser.instructions
 
-      input_parser.instructions.each do |instruction|
+      instructions.each do |instruction|
         robot = create_robot(instruction, grid)
         robot.respond_to_commands(instruction[:commands])
         robot.report_location
