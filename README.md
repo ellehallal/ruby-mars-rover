@@ -2,7 +2,10 @@
 
 ## Installation
 
-Ruby 3.1.1 or higher is required. Please refer to the Ruby installation documentation [here](https://www.ruby-lang.org/en/documentation/installation/).
+**Requirements:**
+
+- Ruby v3.1.1 or higher ([documentation](https://www.ruby-lang.org/en/documentation/installation/))
+- Bundler gem ([documentation](https://bundler.io/))
 
 Clone this repo, and run:
 
@@ -44,9 +47,9 @@ rubocop
 
 - Checking the coordinate values are 50 or less
 - Checking the instruction strings are less than 100 characters in length
-- Checking the orientation is either N, S, E or W
-- Checking each direction is either L, R or F
+- Checking the orientation valid (N, S, E or W)
+- Checking each direction is valid (L, R or F)
 
-### Refactoring
+### Parsing Input
 
-- Renaming some methods and variables to be clearer
+- Consider the possibility of whitespace on each input line
