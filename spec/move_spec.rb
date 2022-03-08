@@ -16,93 +16,98 @@ describe 'Move' do
   let(:current_coordinate) { all_coordinates[[current_x_axis, current_y_axis]] }
   let(:orientation) { Orientation.new(direction: direction, current_orientation: current_orientation) }
 
-  describe 'new position exists and current position has no scent' do
-    describe 'north orientation' do
-      let(:current_orientation) { north_orientation }
+  describe 'new position exists' do
+    describe 'current position scent is false' do
+      describe 'north orientation' do
+        let(:current_orientation) { north_orientation }
 
-      it 'returns the updated position where y_axis increases by 1' do
-        expect(to_position[:coordinate].x_axis).to eq(current_x_axis)
-        expect(to_position[:coordinate].y_axis).to eq(current_y_axis + 1)
+        it 'returns the updated position where y_axis increases by 1' do
+          expect(to_position[:coordinate].x_axis).to eq(current_x_axis)
+          expect(to_position[:coordinate].y_axis).to eq(current_y_axis + 1)
+        end
+      end
+
+      describe 'south orientation' do
+        let(:current_orientation) { south_orientation }
+
+        it 'returns the updated position where y_axis decreases by 1' do
+          expect(to_position[:coordinate].x_axis).to eq(current_x_axis)
+          expect(to_position[:coordinate].y_axis).to eq(current_y_axis - 1)
+        end
+      end
+
+      describe 'east orientation' do
+        let(:current_orientation) { east_orientation }
+
+        it 'returns the updated position where x_axis increases by 1' do
+          expect(to_position[:coordinate].x_axis).to eq(current_x_axis + 1)
+          expect(to_position[:coordinate].y_axis).to eq(current_y_axis)
+        end
+      end
+
+      describe 'west orientation' do
+        let(:current_orientation) { west_orientation }
+
+        it 'returns the updated position where x_axis decreases by 1' do
+          expect(to_position[:coordinate].x_axis).to eq(current_x_axis - 1)
+          expect(to_position[:coordinate].y_axis).to eq(current_y_axis)
+        end
       end
     end
 
-    describe 'south orientation' do
-      let(:current_orientation) { south_orientation }
-
-      it 'returns the updated position where y_axis decreases by 1' do
-        expect(to_position[:coordinate].x_axis).to eq(current_x_axis)
-        expect(to_position[:coordinate].y_axis).to eq(current_y_axis - 1)
-      end
-    end
-
-    describe 'east orientation' do
-      let(:current_orientation) { east_orientation }
-
-      it 'returns the updated position where x_axis increases by 1' do
-        expect(to_position[:coordinate].x_axis).to eq(current_x_axis + 1)
-        expect(to_position[:coordinate].y_axis).to eq(current_y_axis)
-      end
-    end
-
-    describe 'west orientation' do
+    describe 'current position scent is true' do
       let(:current_orientation) { west_orientation }
+      let(:current_x_axis) { 2 }
+      let(:current_y_axis) { 3 }
 
-      it 'returns the updated position where x_axis decreases by 1' do
-        expect(to_position[:coordinate].x_axis).to eq(current_x_axis - 1)
-        expect(to_position[:coordinate].y_axis).to eq(current_y_axis)
+      it 'returns the new position' do
+        current_coordinate.set_scent
+
+        expect(to_position[:coordinate]).not_to eq(current_coordinate)
+        expect(to_position[:coordinate].y_axis).not_to be nil
+      end
+
+      it 'returns the lost status as false' do
+        current_coordinate.set_scent
+
+        expect(to_position[:lost]).to eq(false)
       end
     end
   end
 
-  describe 'new position does not exist and current position has no scent' do
-    let(:current_orientation) { north_orientation }
-    let(:current_x_axis) { 2 }
-    let(:current_y_axis) { 3 }
+  describe 'new position does not exist' do
+    describe 'current position scent is true' do
+      let(:current_orientation) { west_orientation }
+      let(:current_x_axis) { 2 }
+      let(:current_y_axis) { 3 }
 
-    it 'returns the current position' do
-      expect(to_position[:coordinate].x_axis).to eq(current_x_axis)
-      expect(to_position[:coordinate].y_axis).to eq(current_y_axis)
+      it 'returns the new position' do
+        current_coordinate.set_scent
+
+        expect(to_position[:coordinate]).not_to eq(current_coordinate)
+        expect(to_position[:coordinate].y_axis).not_to be nil
+      end
+
+      it 'returns the lost status as false' do
+        current_coordinate.set_scent
+
+        expect(to_position[:lost]).to eq(false)
+      end
     end
 
-    it 'returns the lost status as true' do
-      expect(to_position[:lost]).to eq(true)
-    end
-  end
+    describe 'current position scent is false' do
+      let(:current_orientation) { north_orientation }
+      let(:current_x_axis) { 2 }
+      let(:current_y_axis) { 3 }
 
-  describe 'new position exists and current position has a scent' do
-    let(:current_orientation) { west_orientation }
-    let(:current_x_axis) { 2 }
-    let(:current_y_axis) { 3 }
+      it 'returns the current position' do
+        expect(to_position[:coordinate].x_axis).to eq(current_x_axis)
+        expect(to_position[:coordinate].y_axis).to eq(current_y_axis)
+      end
 
-    it 'returns the new position' do
-      current_coordinate.set_scent
-
-      expect(to_position[:coordinate]).not_to eq(current_coordinate)
-      expect(to_position[:coordinate].y_axis).not_to be nil
-    end
-
-    it 'returns the lost status as false' do
-      current_coordinate.set_scent
-
-      expect(to_position[:lost]).to eq(false)
-    end
-  end
-
-  describe 'new position does not exist and current position has a scent' do
-    let(:current_orientation) { north_orientation }
-    let(:current_x_axis) { 2 }
-    let(:current_y_axis) { 3 }
-
-    it 'returns the current position' do
-      current_coordinate.set_scent
-
-      expect(to_position[:coordinate]).to eq(current_coordinate)
-    end
-
-    it 'returns the lost status as false' do
-      current_coordinate.set_scent
-
-      expect(to_position[:lost]).to eq(false)
+      it 'returns the lost status as true' do
+        expect(to_position[:lost]).to eq(true)
+      end
     end
   end
 end

@@ -13,11 +13,12 @@ class MarsRover
     def start(file_path)
       input_parser = create_input_parser(file_path)
       grid = create_grid(input_parser.grid_size)
+      instructions = input_parser.instructions
 
-      input_parser.instructions.each do |instruction|
+      instructions.each do |instruction|
         robot = create_robot(instruction, grid)
         robot.respond_to_commands(instruction[:commands])
-        Output.print(robot.report_location)
+        robot.report_location
       end
     end
 
@@ -49,7 +50,8 @@ class MarsRover
         x_axis: instruction[:x_axis],
         y_axis: instruction[:y_axis],
         direction: Direction,
-        move: Move
+        move: Move,
+        output: Output
       )
     end
   end

@@ -39,7 +39,7 @@ class Move
       {
         coordinate: current_position,
         lost: false
-      }.clone
+      }
     end
   end
 end
