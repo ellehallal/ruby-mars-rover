@@ -4,6 +4,7 @@ require 'grid'
 require 'orientation'
 require 'direction'
 require 'move'
+require 'output'
 
 describe 'Robot' do
   subject do
@@ -13,7 +14,8 @@ describe 'Robot' do
       x_axis: x_axis,
       y_axis: y_axis,
       direction: direction,
-      move: move
+      move: move,
+      output: output
     )
   end
 
@@ -25,6 +27,7 @@ describe 'Robot' do
   let(:x_axis) { 1 }
   let(:y_axis) { 2 }
   let(:move) { Move }
+  let(:output) { Output }
 
   describe 'respond_to_commands' do
     describe 'orientation' do
@@ -137,18 +140,24 @@ describe 'Robot' do
   end
 
   describe 'report location' do
+    before { allow(Output).to receive(:print) }
     let(:x_axis) { 2 }
     let(:y_axis) { 3 }
 
-    it 'returns the current location' do
+    it 'outputs the location' do
       subject.respond_to_commands([right_direction])
 
-      expect(subject.report_location).to eq('23E')
+      subject.report_location
+
+      expect(Output).to have_received(:print).with('23E')
     end
 
-    it 'returns the last known location when lost' do
+    it 'outputs the last known location when lost' do
       subject.respond_to_commands([forward_direction])
-      expect(subject.report_location).to eq('23NLOST')
+
+      subject.report_location
+
+      expect(Output).to have_received(:print).with('23NLOST')
     end
   end
 end

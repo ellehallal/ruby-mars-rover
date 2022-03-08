@@ -1,13 +1,14 @@
 class Robot
   attr_reader :current_position, :lost
 
-  def initialize(grid:, orientation:, x_axis:, y_axis:, direction:, move:)
+  def initialize(grid:, orientation:, x_axis:, y_axis:, direction:, move:, output:)
     @lost = false
     @grid = grid
     @orientation = orientation
     @current_position = @grid.get_coordinate([x_axis, y_axis])
     @direction = direction
     @move = move
+    @output = output
   end
 
   def respond_to_commands(commands)
@@ -29,9 +30,9 @@ class Robot
     location = "#{@current_position.x_axis}#{current_position.y_axis}#{current_orientation}"
 
     if lost
-      "#{location}LOST"
+      @output.print("#{location}LOST")
     else
-      location
+      @output.print(location)
     end
   end
 
